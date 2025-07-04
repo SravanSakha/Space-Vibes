@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SpaceVibes - NASA Meets Music</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #f0f6fc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #58a6ff;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 20px 0;
+      box-shadow: 0 0 20px #58a6ff55;
+    }
+    .description {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+    .spotify {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 SpaceVibes</h1>
+  <h3>NASA Astronomy Picture of the Day + Mood Music</h3>
+
+  <div id="nasa-section">
+    <h2 id="title">Loading...</h2>
+    <img id="apod-img" src="" alt="NASA Astronomy Picture" />
+    <p class="description" id="explanation"></p>
+  </div>
+
+  <div class="spotify">
+    <h2>🎧 Spotify Vibes</h2>
+    <!-- Example Embed Playlist -->
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWXRqgorJj26U?utm_source=generator" width="80%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+    <p style="margin-top: 10px;">(This playlist is based on a calm cosmic mood)</p>
+  </div>
+
+  <script>
+    const apiKey = 'DEMO_KEY'; // Replace with your NASA API key if you have one
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('title').textContent = data.title;
+        document.getElementById('apod-img').src = data.url;
+        document.getElementById('explanation').textContent = data.explanation;
+      })
+      .catch(err => {
+        document.getElementById('title').textContent = 'Failed to fetch image.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
