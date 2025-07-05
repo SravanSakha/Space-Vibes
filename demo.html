@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpaceVibes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 20px 0;
+      box-shadow: 0 0 20px #58a6ff55;
+    }
+
+    .description {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .spotify {
+      margin-top: 30px;
+    }
+
+    #loading {
+      font-size: 1.2rem;
+      color: #fff;
+      animation: pulse 1.5s infinite;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    body.dark {
+      background-color: #111;
+      color: #eee;
+    }
+
+    body.dark #loading {
+      color: #ccc;
+    }
+
+    body.dark button {
+      background-color: #222;
+      color: #eee;
+      border: 1px solid #555;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      background: #0077ff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005edb;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 SpaceVibes</h1>
+  <h3>NASA Astronomy Picture of the Day + Mood Music</h3>
+
+  <div id="loading">🚀 Loading your cosmic vibe...</div>
+
+  <div id="mainContent" style="display: none;">
+    <div id="nasa-section">
+      <h2 id="title">Loading...</h2>
+      <img id="apod-img" src="" alt="NASA Astronomy Picture" />
+      <p class="description" id="explanation"></p>
+    </div>
+
+    <div class="spotify">
+      <h2>🎧 Spotify Vibes</h2>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWXRqgorJj26U?utm_source=generator"
+        width="80%" height="152" frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy">
+      </iframe>
+      <p style="margin-top: 10px;">(This playlist is based on a calm cosmic mood)</p>
+    </div>
+
+    <button onclick="readText()">🔊 Read Description</button>
+    <button id="darkToggle">🌗 Toggle Dark Mode</button>
+  </div>
+
+  <script>
+    // Dark mode toggle
+    document.getElementById("darkToggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+
+    // Loading logic
+    const loading = document.getElementById("loading");
+    const mainContent = document.getElementById("mainContent");
+
+    loading.style.display = "block";
+    mainContent.style.display = "none";
+
+    // NASA API fetch
+    const apiKey = 'DEMO_KEY'; // Replace with your NASA API key
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("title").textContent = data.title;
+        document.getElementById("apod-img").src = data.url;
+        document.getElementById("explanation").textContent = data.explanation;
+
+        loading.style.display = "none";
+        mainContent.style.display = "block";
+      })
+      .catch(err => {
+        loading.textContent = "🛸 Failed to fetch your cosmic vibe.";
+        console.error(err);
+      });
+
+    // Text-to-speech
+    function readText() {
+      const title = document.getElementById("title").innerText;
+      const explanation = document.getElementById("explanation").innerText;
+      const msg = new SpeechSynthesisUtterance(`${title}. ${explanation}`);
+      window.speechSynthesis.speak(msg);
+    }
+  </script>
+</body>
+</html>
