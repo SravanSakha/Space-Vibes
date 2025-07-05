@@ -31,12 +31,24 @@
     .spotify {
       margin-top: 30px;
     }
+#loading {
+  font-size: 1.2rem;
+  color: #fff;
+  animation: pulse 1.5s infinite;
+  text-align: center;
+  margin-top: 50px;
+}
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
   </style>
 </head>
 <body>
   <h1>🚀 SpaceVibes</h1>
   <h3>NASA Astronomy Picture of the Day + Mood Music</h3>
-
+<div id="loading">🚀 Loading your cosmic vibe...</div>
   <div id="nasa-section">
     <h2 id="title">Loading...</h2>
     <img id="apod-img" src="" alt="NASA Astronomy Picture" />
@@ -51,6 +63,9 @@
   </div>
 
   <script>
+document.getElementById("loading").style.display = "block";
+// after fetch()
+document.getElementById("loading").style.display = "none";
     const apiKey = 'DEMO_KEY'; // Replace with your NASA API key if you have one
     const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
