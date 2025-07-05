@@ -97,7 +97,7 @@
       <p style="margin-top: 10px;">(This playlist is based on a calm cosmic mood)</p>
     </div>
 
-    <button onclick="readText()">🔊 Read Description</button>
+   <button onclick="readText()" ondblclick="stopReading()">🔊 Read Description</button>
     <button id="darkToggle">🌗 Toggle Dark Mode</button>
   </div>
 
@@ -140,6 +140,16 @@
       const msg = new SpeechSynthesisUtterance(`${title}. ${explanation}`);
       window.speechSynthesis.speak(msg);
     }
+function readText() {
+  const title = document.getElementById("title").innerText;
+  const explanation = document.getElementById("explanation").innerText;
+  const msg = new SpeechSynthesisUtterance(`${title}. ${explanation}`);
+  window.speechSynthesis.speak(msg);
+}
+
+function stopReading() {
+  window.speechSynthesis.cancel();
+}
   </script>
 </body>
 </html>
