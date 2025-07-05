@@ -43,6 +43,20 @@
   50% { opacity: 1; }
   100% { opacity: 0.4; }
 }
+body.dark {
+  background-color: #111;
+  color: #eee;
+}
+
+body.dark #loading {
+  color: #ccc;
+}
+
+body.dark button {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #555;
+}
   </style>
 </head>
 <body>
@@ -61,8 +75,12 @@
     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWXRqgorJj26U?utm_source=generator" width="80%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
     <p style="margin-top: 10px;">(This playlist is based on a calm cosmic mood)</p>
   </div>
+<button id="darkToggle">🌗 Toggle Dark Mode</button>
 
   <script>
+document.getElementById("darkToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
 document.getElementById("loading").style.display = "block";
 // after fetch()
 document.getElementById("loading").style.display = "none";
