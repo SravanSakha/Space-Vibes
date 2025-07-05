@@ -85,24 +85,17 @@ document.getElementById("loading").style.display = "block";
 // after fetch()
 document.getElementById("loading").style.display = "none";
     const apiKey = 'DEMO_KEY'; // Replace with your NASA API key if you have one
-function applyThemeFromText(text) {
-  if (text.includes("sun") || text.includes("light") || text.includes("flare")) {
-    document.body.style.background = "linear-gradient(to bottom, #fceabb, #f8b500)";
-  } else if (text.includes("night") || text.includes("dark") || text.includes("eclipse")) {
-    document.body.style.background = "linear-gradient(to bottom, #0f2027, #203a43, #2c5364)";
-  } else {
-    document.body.style.background = "linear-gradient(to bottom, #1e3c72, #2a5298)";
-  }
-}
+
     const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
     fetch(url)
       .then(res => res.json())
       .then(data => {
         document.getElementById('title').textContent = data.title;
+window.onload = function() {
+  alert("👋 Welcome to SpaceVibes!\n\nExplore the cosmos and feel the vibe.");
+};
         document.getElementById('apod-img').src = data.url;
-  applyThemeFromText(data.explanation);      document.getElementById('explanation').textContent = data.explanation;
-      })
       .catch(err => {
         document.getElementById('title').textContent = 'Failed to fetch image.';
         console.error(err);
