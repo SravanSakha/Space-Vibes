@@ -92,9 +92,7 @@ document.getElementById("loading").style.display = "none";
       .then(res => res.json())
       .then(data => {
         document.getElementById('title').textContent = data.title;
-window.onload = function() {
-  alert("👋 Welcome to SpaceVibes!\n\nExplore the cosmos and feel the vibe.");
-};
+
         document.getElementById('apod-img').src = data.url;
       .catch(err => {
         document.getElementById('title').textContent = 'Failed to fetch image.';
